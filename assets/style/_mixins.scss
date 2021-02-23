@@ -1,0 +1,63 @@
+@mixin flex($dir: row, $wrp: nowrap, $ai: stretch, $jc: flex-start, $ac: stretch) {
+    display: flex;
+    flex-direction: $dir;
+    flex-wrap: $wrp;
+    align-items: $ai;
+    justify-content: $jc;
+    align-content: $ac;
+}
+@mixin container($ancho: 90%, $limitado: true) {
+    width: $ancho;
+    margin: 0 auto;
+    @if $limitado {
+        max-width: 2732px;
+    }
+}
+@mixin imagen ($imagen: false, $medida: cover, $posicion: center, $repeat: no-repeat) {
+    @if  $imagen {
+        background-image: url($imagen);
+    }
+    background-size: $medida;
+    background-position: $posicion;
+    background-repeat: $repeat;
+}
+@mixin ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+@mixin ellipsisParrafo($lineas: 3){
+  text-align: left;
+  -webkit-line-clamp: $lineas;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+}
+@mixin scrollbars($size: 3px, $foreground-color: rgba(#000,.5), $background-color: mix($foreground-color, #fff, 50%)) {
+    &::-webkit-scrollbar {
+        width:  $size;
+        height: $size;
+        background: $background-color;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: $foreground-color;
+    }
+    &::-webkit-scrollbar-track {
+        background: $background-color;
+    }
+}
+
+
+@mixin pantalla {
+    @media only screen and (max-width: 1024px){@content;}
+}
+@mixin tableta {
+    @media only screen and (max-width: 768px){@content;}
+}
+@mixin celular {
+    @media only screen and (max-width: 480px){@content;}
+}
+@mixin responsivo($medida) {
+    @media only screen and (max-width: $medida){@content;}
+}
