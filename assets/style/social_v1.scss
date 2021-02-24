@@ -243,7 +243,6 @@ body{
         background-color: $blanco;
         box-shadow: 0 -10px 20px 0 rgba($negro,.1);
         .accion{
-          width: 50px;
           &.usuario{
             position: fixed;
             top: 25px;
@@ -256,6 +255,13 @@ body{
               }
             }
           }
+          &:not(.usuario){
+            flex-grow: 1;
+            border-right: 1px solid rgba($negro,.1);
+          }
+        }
+        .menuR{
+          flex-grow: 1;
         }
       }
     }
