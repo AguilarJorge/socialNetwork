@@ -12,6 +12,7 @@ $prefix: 'social_';
     --alturaMenu: 90px;
   }
 }
+
 body{
   overflow-x: hidden;
   color: #666;
@@ -54,14 +55,13 @@ body{
   }
 }
 ::-webkit-scrollbar {
-  width: 10px;
-  background: #dcdcdc;
+  width: 5px;
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background: -webkit-linear-gradient(-45deg, #dcdcdc 10%, #bfbebe 91%);
-  background: linear-gradient(135deg, #dcdcdc 10%, #bfbebe 91%);
+  -webkit-box-shadow: inset 0 0 6px rgba($negro,.3);
+  box-shadow: inset 0 0 6px rgba($negro,.3);
+  background: #cbcbcb;
 }
 
 //Generales
@@ -125,6 +125,27 @@ body{
       @include flex(row, nowrap, center, space-between, center);
       width: 300px;
       height: var(--alturaMenu);
+      .accion, .menuR{
+        position: relative;
+        &.activ{
+          color: $primario;
+          &:after{
+            width: 100%;
+          }
+        }
+        &:after{
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          margin: 0 auto;
+          width: 0;
+          height: 2px;
+          background-color: $primario;
+          transition: ease all .3s;
+        }
+      }
       .accion{
         @include flex(column, nowrap, center, center, center);
         height: 100%;
@@ -171,25 +192,6 @@ body{
         height: 100%;
         cursor: pointer;
         display: none;
-        position: relative;
-        &:after{
-          content: "";
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          margin: 0 auto;
-          width: 0;
-          height: 2px;
-          background-color: $primario;
-          transition: ease all .3s;
-        }
-        &.activ{
-          color: $primario;
-          &:after{
-            width: 100%;
-          }
-        }
         .icono{
           width: 20px;
           height: 20px;
@@ -229,10 +231,16 @@ body{
       }
       .menusAcciones{
         height: auto;
+        .accion, .menuR{
+          &:after{
+            display: none;
+          }
+        }
       }
     }
   }
   @include responsivo(550px){
+    z-index: 1001;
     .#{$prefix}container{
       .menusAcciones{
         position: fixed;
@@ -242,6 +250,14 @@ body{
         height: 50px;
         background-color: $blanco;
         box-shadow: 0 -10px 20px 0 rgba($negro,.1);
+        .accion, .menuR{
+          &:after{
+            display: block;
+            top: 0;
+            bottom: auto;
+            height: 4px;
+          }
+        }
         .accion{
           &.usuario{
             position: fixed;
@@ -378,10 +394,10 @@ body{
               background-color: #f1f1f1;
               position: relative;
               cursor: pointer;
+              &:after{
+                content: attr(data-texto);
+              }
               &.foto{
-                &:after{
-                  content: "Foto/Video";
-                }
                 input{
                   position: absolute;
                   top: 0;
@@ -393,11 +409,6 @@ body{
                   opacity: 0;
                   font-size: 0;
                   cursor: pointer;
-                }
-              }
-              &.actividad{
-                &:after{
-                  content: "Sentimiento/Actividad";
                 }
               }
               &.publicar{
@@ -541,6 +552,9 @@ body{
                     transform: translateX(-($i * 10px) + 10px);
                   }
                 }
+              }
+              .num{
+                margin-right: 3px;
               }
             }
           }
@@ -953,6 +967,126 @@ body{
                   font-size: 10px;
                 }
               }
+            }
+          }
+        }
+      }
+    }
+    @include responsivo(550px){
+      .menuIzq{
+        padding-top: calc(var(--alturaMenu) + 20px);
+        padding-bottom: 70px;
+      }
+      .contenido{
+        .publicador{
+          margin-bottom: 50px;
+          .contenedorPublicador{
+            position: relative;
+            .acciones{
+              justify-content: flex-start;
+              .accion{
+                &.publicar{
+                  position: absolute;
+                  bottom: 0;
+                  right: 20px;
+                  width: 30px;
+                  height: 30px;
+                  padding: 10px;
+                  border-radius: 50%;
+                  transform: translateY(50%);
+                  &:after{
+                    display: none;
+                  }
+                  .icono{
+                    margin: 0;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    @include tableta{
+      .contenido{
+        .contenedorPublicaciones{
+          .publicacion{
+            .interaccion{
+              margin-top: 30px;
+              justify-content: space-between;
+              .int{
+                margin: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+    @include celular{
+      .contenido{
+        .publicador{
+          .contenedorPublicador{
+            .avatar{
+              display: none;
+            }
+            .redactor{
+              width: 100%;
+            }
+            .acciones{
+              .accion{
+                padding: 12px;
+                &:after{
+                  display: none;
+                }
+                .icono{
+                  width: 18px;
+                  height: 18px;
+                  margin: 0;
+                }
+              }
+            }
+          }
+        }
+        .contenedorPublicaciones{
+          .publicacion{
+            .datos{
+              .avatar{
+                width: 30px;
+                height: 30px;
+                min-width: 30px;
+              }
+              .textos{
+                width: calc(100% - 40px);
+                p{
+                  &.nombre{
+                    font-size: 12px;
+                  }
+                  &.datetime{
+                    font-size: 10px;
+                  }
+                }
+              }
+            }
+            .contPub{
+              font-size: 12px;
+            }
+            .indicadores{
+              justify-content: center;
+              .ind{
+                flex-direction: column;
+                &:first-child{
+                  margin-left: 0;
+                }
+                .imgReac{
+                  display: none;
+                }
+                .num{
+                  margin-right: 0;
+                }
+              }
+            }
+            .interaccion{
+              margin-top: 15px;
             }
           }
         }

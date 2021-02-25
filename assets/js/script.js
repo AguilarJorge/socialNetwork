@@ -31,33 +31,6 @@ $(function () {
     var idSala = $('.menuLateral .tab.listaSalas .sala.activa').data('id');
     pushMensaje(idSala, url, tipo);
   }
-  const navegador = () => {
-    if((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) != -1 ) 
-   {
-       alert('Opera');
-   }
-   else if(navigator.userAgent.indexOf("Chrome") != -1 )
-   {
-       alert('Chrome');
-   }
-   else if(navigator.userAgent.indexOf("Safari") != -1)
-   {
-       alert('Safari');
-   }
-   else if(navigator.userAgent.indexOf("Firefox") != -1 ) 
-   {
-        alert('Firefox');
-   }
-   else if((navigator.userAgent.indexOf("MSIE") != -1 ) || (!!document.documentMode == true )) //IF IE > 10
-   {
-     alert('IE'); 
-   }  
-   else 
-   {
-      alert('unknown');
-   }
-   }
-
 
   //---------- Acciones del publicador ----------
   //Subir foto/video
@@ -156,5 +129,11 @@ $(function () {
     $('body').toggleClass('shadowLayer');
     $(this).toggleClass('activ');
     $('.social_principal .menuDer .grupo.chat').toggleClass('activ');
+  })
+  //Cerrar droppables
+  $('body').click(function(){
+    if ($(this).hasClass('shadowLayer')) {
+      console.log('cd');
+    }
   })
 })
