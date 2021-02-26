@@ -32,6 +32,21 @@ $(function () {
     pushMensaje(idSala, url, tipo);
   }
 
+  //Droppables
+  $('.jf-drop .jf-lanzadorDrop').click(function(){
+    $(this).siblings('.jf-contenidoDrop').slideToggle('fast');
+  })
+  //Cerrar droppables
+  $('body').click(function () {
+    if ($(this).hasClass('shadowLayer')) {
+      $(this).removeClass('shadowLayer');
+      $('.menuR').removeClass('activ');
+      $('.social_principal .menuIzq').removeClass('activ');
+      $('.social_responsiveLaunchers .launcherXhat').removeClass('activ');
+      $('.social_principal .menuDer .grupo.chat').removeClass('activ');
+    }
+  })
+
   //---------- Acciones del publicador ----------
   //Subir foto/video
   $('.publicador .acciones .accion.foto input').change(function (e) {
@@ -120,20 +135,16 @@ $(function () {
   })
 
   //---------- Responsives ----------
-  $('.menuR').click(function(){
+  $('.menuR').click(function(e){
+    e.stopPropagation();
     $('body').toggleClass('shadowLayer');
     $(this).toggleClass('activ');
     $('.social_principal .menuIzq').toggleClass('activ');
   })
-  $('.social_responsiveLaunchers .launcherXhat').click(function(){
+  $('.social_responsiveLaunchers .launcherXhat').click(function(e){
+    e.stopPropagation();
     $('body').toggleClass('shadowLayer');
     $(this).toggleClass('activ');
     $('.social_principal .menuDer .grupo.chat').toggleClass('activ');
-  })
-  //Cerrar droppables
-  $('body').click(function(){
-    if ($(this).hasClass('shadowLayer')) {
-      console.log('cd');
-    }
   })
 })

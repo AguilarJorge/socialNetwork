@@ -5,6 +5,7 @@ $negro: #000;
 $blanco: #fff;
 $primario: #0066ff;
 $prefix: 'social_';
+$framework: 'jf-';
 // Dinamic vars
 :root {
   --alturaMenu: 50px;
@@ -36,9 +37,12 @@ body{
   }
   a {
     text-decoration: none;
+    color: #666;
   }
   ul, li{
     list-style-type: none;
+    padding: 0;
+    margin: 0;
   }
   &:after{
     content: "";
@@ -70,6 +74,47 @@ body{
 }
 .#{$prefix}opacity{
   opacity: .3;
+}
+
+.#{$framework}drop{
+  position: relative;
+  .#{$framework}contenidoDrop{
+    @include scrollbars($foreground-color: rgba($blanco,.2));
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: max-content;
+    min-width: 200px;
+    max-width: 300px;
+    max-height: 500px;
+    margin-top: 10px;
+    background-color: $blanco;
+    transform: translateX(-50%);
+    border: 1px solid rgba($negro,.1);
+    cursor: default;
+    overflow: auto;
+    .#{$framework}dropHeader{
+      color: $negro;
+      font-size: 22px;
+      font-weight: 600;
+      padding: 20px 10px;
+    }
+    .#{$framework}dropContent{
+      padding: 20px 0;
+    }
+    .link{
+      a{
+        display: block;
+        padding: 10px;
+        text-align: center;
+        transition: ease all .3s;
+        &:hover{
+          background-color: rgba($negro,.1);
+        }
+      }
+    }
+  }
 }
 
 
@@ -183,7 +228,59 @@ body{
           }
         }
         .contenidoDrop{
-          display: none;
+          .solicitud{
+            @include flex;
+            padding: 10px;
+            transition: ease all .3s;
+            &:hover{
+              background-color: rgba($negro,.05);
+            }
+            .avatar{
+              @include imagen;
+              width: 50px;
+              height: 50px;
+              min-width: 50px;
+              margin-right: 10px;
+              border-radius: 50%;
+            }
+            .txt{
+              font-size: 14px;
+              .bolder{
+                font-weight: 600;
+                color: $negro;
+              }
+              p{
+                margin-bottom: 5px;
+              }
+              .mini{
+                font-size: 10px;
+                margin-bottom: 0;
+              }
+              .actions{
+                @include flex;
+                margin-top: 20px;
+                .action{
+                  padding: 7px 15px;;
+                  background-color: lightgray;
+                  color: $negro;
+                  font-weight: 600;
+                  border-radius: 50px;
+                  cursor: pointer;
+                  transition: ease all .3s;
+                  &:hover{
+                    box-shadow: 0 5px 10px 0 rgba($negro,.1);
+                  }
+                  &:not(:last-child){
+                    margin-right: 10px;
+                  }
+                  &.aceptar{
+                    background-color: $primario;
+                    color: $blanco;
+                  }
+                }
+              }
+            }
+          }
         }
       }
       .menuR{
